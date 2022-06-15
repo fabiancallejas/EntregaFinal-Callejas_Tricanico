@@ -12,7 +12,7 @@
    </head>
       <body>
          {% load widget_tweaks %}
-     
+
      <!-- Form de Posteo-->
      <section class="contact-form-wrap section">
          <div class="container">
@@ -28,7 +28,7 @@
                         Nombre: {{form.first_name|add_class:"form-control" }}
                         </div>
                         <div class="form-group">
-                        Apellido: {{form.second_name|add_class:"form-control" }}
+                        Apellido: {{form.last_name|add_class:"form-control" }}
                         </div>
                         <div class="form-group">
                         <div class="form-group">
@@ -43,8 +43,8 @@
                      </form>
                  </div>
      </html>
-     
-      
+
+
 </html>
 
 {%endblock%}
