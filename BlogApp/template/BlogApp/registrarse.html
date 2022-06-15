@@ -1,0 +1,41 @@
+
+{% extends "BlogApp/padre.html" %}
+
+{% load static %}
+{% block contenidoQueCambia %}
+
+
+<html>
+   <head>
+   {{ form.media }}
+      {% include 'django_quill/media.html' %}
+   </head>
+      <body>
+         {% load widget_tweaks %}
+     
+     <!-- Form de Posteo-->
+     <section class="contact-form-wrap section">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-6 col-md-12 col-sm-12">
+                      <form role="form" method="POST">
+                         {% csrf_token %}
+                         <h3 class="text-md mb-4">Iniciar Sesión</h3>
+                         <div class="form-group">
+                         Usuario: {{form.username|add_class:"form-control" }}
+                         </div>
+                         <div class="form-group">
+                         Contraseña: {{form.password1|add_class:"form-control" }}
+                         Confirmar Contraseña: {{form.password2|add_class:"form-control" }}
+                         Email: {{form.email|add_class:"form-control" }}
+
+
+                         <button class="btn btn-main" name="submit" type="submit">Registrese</button>
+                     </form>
+                 </div>
+     </html>
+     
+      
+</html>
+
+{% endblock %}

@@ -55,4 +55,4 @@ class Post(models.Model):
     contenido = QuillField()
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
     def __str__(self):
-        return self.slug 
+        return self.slug

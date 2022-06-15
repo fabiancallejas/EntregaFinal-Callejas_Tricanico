@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.detail import DetailView
-from .forms import Disco,Video
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import login,authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from .forms import Disco,Video,UserRegistrationForm,UserEditForm
 from .models import Disco,Videos,Post
 from django import forms
 
@@ -61,10 +66,10 @@ def agregar_video(request):
         video = datosvideo ['video']
         video_completo = Videos(titulo=titulo, cuerpo=cuerpo, video=video)
         video_completo.save()
-    
+
         Tut = Videos.objects.all()
-        context = { 
-            'Tut': Tut, 
+        context = {
+            'Tut': Tut,
         }
         return  render(request, 'BlogApp/lista_videos.html', context)
     else:
@@ -127,5 +132,58 @@ def agregar_post(request):
 
 def ver_posts(request):
     posts = Post.objects.all()
-    contexto = {'posts':posts}    
+    contexto = {'posts':posts}
     return render (request, 'BlogApp/lista_post.html', contexto)
+
+## Relacionado a Autenticación
+
+##Autenticación
+def autenticarse(request):
+  if request.method == 'POST':
+    form = AuthenticationForm(request, request.POST)
+    if form.is_valid():
+      usuario = form.cleaned_data.get('username')
+      contrasenia = form.cleaned_data.get('password')
+      # Autenticación de usuario
+      user = authenticate(username=usuario, password=contrasenia) # Si este usuario existe me lo trae
+      if user is not None:
+        login(request,user) # Si existe, lo loguea
+        return render(request, 'BlogApp/index.html', {'mensaje': f'Bienvenido {usuario}'})
+      else:
+        return render(request, 'BlogApp/index.html', {'mensaje': 'Error, datos incorrectos'})
+    else:
+      return render(request,'BlogApp/index.html', {'mensaje': 'Error, formulario erróneo'})
+  form = AuthenticationForm() # Creo un formulario vacío si vengo por GET
+  return render(request, 'BlogApp/login.html', {'form':form})
+
+#Registrarse
+def registrarse(request):
+  if request.method == 'POST':
+    form = UserRegistrationForm(request.POST)
+    if form.is_valid():
+      usuario = form.cleaned_data['username']
+      form.save()
+      return render(request, 'BlogApp/index.html', {'mensaje': f'Usuario {usuario} creado'})
+    else:
+      return render(request, 'BlogApp/index.html', {'mensaje': 'Error, no se pudo crear el usuario'})
+  else:
+    form = UserRegistrationForm()
+    return render(request, 'BlogApp/registrarse.html', {'form':form})
+
+#Editar Perfil
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+    if request.method == 'POST':
+        form == UserEditForm(request.POST)
+        if form.is_valid():
+            informacion = form.cleaned_data
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.save()
+
+            return render(request, 'BlogApp/index.html')
+    else:
+        form = UserEditForm(instance=usuario)
+    return render(request, 'BlogApp/editar_perfil.html',{"form":form, "usuario":usuario} )

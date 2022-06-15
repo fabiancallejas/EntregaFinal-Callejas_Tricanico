@@ -1,5 +1,5 @@
 from django.urls import path
-from BlogApp.views import inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos
+from BlogApp.views import editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView
 
 urlpatterns = [
     path('', inicio, name='inicio'),
@@ -20,5 +20,10 @@ urlpatterns = [
     path('lista_videos/', lista_videos, name= 'lista_videos'),
     path('video/<int:pk>/', detalle_videos, name='detalle_videos'),
 
-]
+    #Todo lo relacionado a autenticación
+    path('autenticarse/', autenticarse, name='autenticarse'),
+    path('registrarse/', registrarse, name='registrarse'),
+    path('salir/', LogoutView.as_view(template_name='BlogApp/salir.html'), name='salir'),
+    path('editar_perfil/', editarPerfil, name='editar_perfil'),
 
+]
