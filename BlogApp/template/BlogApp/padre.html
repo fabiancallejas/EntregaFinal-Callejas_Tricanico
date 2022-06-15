@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	{% load static %}
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="megakit,business,company,agency,multipurpose,modern,bootstrap4">
+  
+  <meta name="author" content="themefisher.com">
+
+  <title>Melanie C - Discografia</title>
+
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="{% static 'BlogApp/plugins/bootstrap/css/bootstrap.min.css' %}"/>
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{% static 'BlogApp/css/style.css' %}"/>
+
+  <!-- django-quill-editor Media -->
+ 	{% include 'django_quill/media.html' %}
+	{{ form.media }}
+
+
+</head>
+
+<body>
+
+
+<!-- Header Start --> 
+
+<header class="navigation">
+	<nav class="navbar navbar-expand-lg  py" id="navbar">
+		<div class="container">
+		  <a class="navbar-brand" href="{% url 'inicio' %}">
+		  	MelanieC<span>Records</span>
+		  </a>
+
+		  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="fa fa-bars"></span>
+		  </button>
+	  
+		  <div class="collapse navbar-collapse text-center" id="navbarsExample09">
+			<ul class="navbar-nav ml-auto">
+			  <li class="nav-item active">
+				<a class="nav-link" href="{% url 'inicio' %}">Home <span class="sr-only">(current)</span></a>
+			  </li>
+			  <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Discografia</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown03">
+						<li><a class="dropdown-item" href="{% url 'lista_discos' %}">Discos</a></li>
+						<li><a class="dropdown-item" href="{% url 'agregar_disco' %}">Agregar Discos</a></li>
+
+					</ul>
+			  </li>
+			   <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Videografía</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown05">
+						<li><a class="dropdown-item" href="{% url 'lista_videos' %}">Videos</a></li>
+						<li><a class="dropdown-item" href="{% url 'agregar_video' %}">Agregar Videos</a></li>
+					</ul>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
+				<ul class="dropdown-menu" aria-labelledby="dropdown05">
+					<li><a class="dropdown-item" href="{% url 'ver_posts' %}">Resúmen</a></li>
+					<li><a class="dropdown-item" href="{% url 'agregar_post' %}">Crear Nueva Entrada</a></li>
+				</ul>
+		  </li>
+			</ul>
+
+			<form class="form-lg-inline my-2 my-md-0 ml-lg-4 text-center">
+			  <a href="login.html" class="btn btn-solid-border btn-round-full">Login</a>
+			</form>
+		  </div>
+		</div>
+	</nav>
+</header>
+
+<!-- Header Close --> 
+
+<div class="main-wrapper ">
+
+<!-- Section Testimonial Start -->
+<main class="main-content">
+    <div class="section">
+        <div class="container">
+            <div class="text-left mt-8">
+					{% block contenidoQueCambia %}
+
+					
+					{% endblock %}		   
+				</div>
+			</div>
+		</div>
+	</main>
+
+<!-- footer Start -->
+		<div class="footer-btm pt-4">
+			<div class="row">
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<span class="text-color"> Marianella Tricánico & Fabián Callejas.</span> <br>
+					 <a href="/aboutus.html" "> About Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+   
+    </div>
+
+    <!-- 
+    Essential Scripts
+    =====================================-->
+
+    
+    <!-- Main jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{% static 'BlogApp/js/contact.js'%}"></script>
+    <!-- Bootstrap 4.3.1 -->
+    <script src="{% static 'BlogApp/plugins/bootstrap/js/popper.js'%}"></script>
+    <script src="{% static 'BlogApp/plugins/bootstrap/js/bootstrap.min.js'%}"></script>
+  </body>
+  </html>
+   

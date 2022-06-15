@@ -1,0 +1,42 @@
+
+{% extends "BlogApp/padre.html" %}
+
+{% load static %}
+{% block contenidoQueCambia %}
+
+
+<html>
+   <head>
+   {{ form.media }}
+      {% include 'django_quill/media.html' %}
+   </head>
+      <body>
+         {% load widget_tweaks %}
+     
+     <!-- Form de Posteo-->
+     <section class="contact-form-wrap section">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-6 col-md-12 col-sm-12">
+                      <form role="form" method="POST">
+                         {% csrf_token %}
+                         <h3 class="text-md mb-4">Agregar Nuevo Video</h3>
+                         <div class="form-group">
+                         Titulo: {{ form.titulo|add_class:"form-control" }}
+                         </div>
+                         <div class="form-group">
+                         Descripción: {{ form.cuerpo|add_class:"form-control" }}
+                         </div>
+                         <div class="form-group">
+                        Link: {{ form.video|add_class:"form-control" }}
+                        </div>
+                         <button class="btn btn-main" name="submit" type="submit">Postear</button>
+                     </form>
+                 </div>
+     </html>
+     
+      
+</html>
+
+{% endblock %}
+

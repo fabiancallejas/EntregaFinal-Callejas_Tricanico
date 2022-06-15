@@ -1,0 +1,18 @@
+{% extends "BlogApp/padre.html" %}
+{% load embed_video_tags %}
+{% block contenidoQueCambia %}
+
+   {{ form.media }}
+      {% include 'django_quill/media.html' %}
+	<div  class="col-md-8 offset-md-2">
+		<h1>{{ Disc.nombre }}</h1>
+		<p>{{ Disc.anio | linebreaks }}</p>
+		<p>{{ Disc.pais | linebreaks }}</p>
+		<p>{{ Disc.formato | linebreaks }}</p>
+		<p>{{ Disc.imagen | linebreaks }}</p>
+		<p>{{ Disc.contenido.html|safe }}</p>
+
+	</div>
+
+{%endblock%}
+

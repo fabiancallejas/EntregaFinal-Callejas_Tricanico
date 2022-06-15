@@ -1,0 +1,46 @@
+
+{% extends "BlogApp/padre.html" %}
+
+{% load static %}
+{% block contenidoQueCambia %}
+
+
+<html>
+   <body>
+    {% load widget_tweaks %}
+
+<!-- Form de Agregar Disco-->
+
+
+<section class="contact-form-wrap section">
+       <div class="row">
+           <div class="col-lg-6 col-md-12 col-sm-12">
+                <form role="form" method="POST">
+                   {% csrf_token %}
+                   <h3 class="text-md mb-4">Agregar Nuevo Disco</h3>
+                   <div class="form-group">
+                  Nombre: {{ form.nombre|add_class:"form-control" }}
+                   </div>
+                   <div class="form-group">
+                  Año: {{ form.anio|add_class:"form-control" }}
+                   </div>
+                   <div class="form-group">
+                  Pais: {{ form.pais|add_class:"form-control" }}
+                   </div>
+                   <div class="form-group">
+                  Formato: {{ form.formato|add_class:"form-control" }}
+                   </div>
+                   <div class="form-group">
+                  Portada: {{ form.imagen|add_class:"form-control" }}
+                 </div>
+                   <div class="form-group-2 mb-4">
+                  Tracklist: {{ form.contenido|add_class:"form-control" }}
+                   </div>
+                   <button class="btn btn-main" name="submit" type="submit">Postear</button>
+               </form>
+           </div>
+</html>
+
+
+{% endblock %}
+

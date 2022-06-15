@@ -1,0 +1,33 @@
+
+{% extends "BlogApp/padre.html" %}
+
+{% load static %}
+{% block contenidoQueCambia %}
+
+
+<html>
+   <head>
+   {{ form.media }}
+      {% include 'django_quill/media.html' %}
+   </head>
+
+  <div  class="col-md-8 offset-md-2">
+		
+   <h1>Lista de Discos</h1>
+   <hr>
+   {% for x in ver_discos %}
+   <h2><a href="{% url 'detalle_discos' x.pk %}">{{ x.nombre}}</a></h2>
+   <p> {{ x.anio|date }} - {{ x.pais }} </p>
+   <p> {{ x.formato }} </p>
+
+   {% empty %}
+   <p>No hay discos todavía!</p>
+   <p><a href="{% url 'agregar_post' %}"> Click aquí para agregar tu primera entrada</a></p>
+   {% endfor %}
+
+</div>
+
+
+</html>
+
+{% endblock %}

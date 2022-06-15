@@ -1,0 +1,16 @@
+{% extends "BlogApp/padre.html" %}
+{% load embed_video_tags %}
+{% block contenidoQueCambia %}
+   <head>
+   {{ form.media }}
+      {% include 'django_quill/media.html' %}
+   </head>
+	<div  class="col-md-8 offset-md-2">
+		<h1>{{ Tut.titulo }}</h1>
+		<p>{{Tut.cuerpo| linebreaks }}</p>
+
+		{% video Tut.video 'tiny' %}
+
+	</div>
+
+{%endblock%}

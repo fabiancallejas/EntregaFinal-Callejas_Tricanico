@@ -1,0 +1,21 @@
+{% extends "BlogApp/padre.html" %}
+{% block contenidoQueCambia %}
+<head>
+	{{ form.media }}
+	   {% include 'django_quill/media.html' %}
+	</head>
+	
+					<h2>{{post.titulo}}</h2>
+					<p> {{post.autor}} {{post.fecha|date}}</p>
+	
+				<img src="{{post.imagen.url}} " alt="Imagen del Post" width="500" height="500" class="rounded-md "> 
+
+				</div>                
+					<p> {{post.resumen | linebreaks}}</p> 
+					<p> {{post.contenido.html|safe}}</p>
+
+	
+	
+	
+	{% endblock %}
+	

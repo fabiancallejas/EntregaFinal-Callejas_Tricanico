@@ -1,0 +1,20 @@
+{% extends "BlogApp/padre.html" %}
+
+{% load static %}
+{% block contenidoQueCambia %}
+
+
+<div  class="col-md-8 offset-md-2">
+		
+    <h1>Lista de Videos</h1>
+    <hr>
+    {% for t in Tut %}
+    <h2><a href="{% url 'detalle_videos' t.pk %}">{{ t.titulo}}</a></h2>
+    <p>{{ t.cuerpo | slice:':400' }}...</p>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}
+
