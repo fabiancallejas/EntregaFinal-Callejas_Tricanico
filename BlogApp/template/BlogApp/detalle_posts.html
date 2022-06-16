@@ -6,7 +6,7 @@
 	</head>
 	
 					<h2>{{post.titulo}}</h2>
-					<p> {{post.autor}} {{post.fecha|date}}</p>
+					<p> {{post.autor}} | {{post.fecha|date}}</p>
 	
 				<img src="{{post.imagen.url}} " alt="Imagen del Post" width="500" height="500" class="rounded-md "> 
 
@@ -16,11 +16,11 @@
 					
 
 					<button>
-						<a href="{% url 'post_editar' post.slug %}"> Editar Post</a>
+						<a href="{% url 'post_editar' post.slug %}" class="btn btn-main"> Editar Post</a>
 					</button>
 					
 					<button>
-						<a href="{% url 'post_eliminar' post.slug %}"> Borrar Post</a>
+						<a href="{% url 'post_eliminar' post.slug %}" class="btn btn-main"> Borrar Post</a>
 					</button>
 					
 	

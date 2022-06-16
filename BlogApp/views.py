@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import DiscoFormulario,Video,UserRegistrationForm,UserEditForm
+from .forms import DiscoFormulario,UserRegistrationForm,UserEditForm
 from .models import Disco,Videos,Post
 from django import forms
 from django.conf import settings
@@ -54,6 +55,7 @@ def detalle_discos(request,pk):
 	}
 	return  render(request, 'BlogApp/detalle_discos.html', contexto)
 
+@login_required(login_url='/BlogApp/autenticarse/')
 def editar_disco(request, pk):
     disco = Disco.objects.get(id=pk)
 
@@ -75,6 +77,7 @@ def editar_disco(request, pk):
         contexto = {'DiscoFormulario':miDisco,'pk':pk}
         return render(request, 'BlogApp/editar_disco.html', contexto)
 
+@login_required(login_url='/BlogApp/autenticarse/')
 def borrar_disco (request,pk):
     disco = Disco.objects.get(id=pk)
     disco.delete()
@@ -121,8 +124,17 @@ def detalle_videos(request,pk):
 	Tut = Videos.objects.get(pk=pk)
 	context = {
 	'Tut': Tut,
+    'pk': pk
 	}
 	return  render(request, 'BlogApp/detalle_videos.html', context)
+
+@login_required(login_url='/BlogApp/autenticarse/')
+def borrar_video (request,pk):
+    video = Videos.objects.get(id=pk)
+    video.delete()
+    videos = Videos.objects.all()
+    contexto = {'ver_videos':videos}
+    return render (request, "BlogApp/lista_videos.html", contexto)
 
 def exito (self):
     documento = f"Llegamos a guardar!"
@@ -164,14 +176,15 @@ def agregar_post(request):
         form = NewForm3()
     return render(request, 'BlogApp/agregar_post.html', {'form': form})
 
+
 #UpdateView
-class PostEdicion(UpdateView):
+class PostEdicion(LoginRequiredMixin,UpdateView):
     model = Post
     success_url = reverse_lazy('ver_posts')
     fields = ['titulo', 'resumen', 'imagen','autor','contenido']
 
 #DeleteView
-class PostEliminar(DeleteView):
+class PostEliminar(LoginRequiredMixin,DeleteView):
     model = Post
     success_url = reverse_lazy('ver_posts')
 

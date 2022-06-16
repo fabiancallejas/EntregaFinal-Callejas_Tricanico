@@ -1,5 +1,5 @@
 from django.urls import path
-from BlogApp.views import borrar_disco, editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView,about_us,PostEdicion,PostEliminar,editar_disco
+from BlogApp.views import borrar_video,borrar_disco, editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView,about_us,PostEdicion,PostEliminar,editar_disco
 
 urlpatterns = [
     path('', inicio, name='inicio'),
@@ -24,6 +24,7 @@ urlpatterns = [
     path('agregar_video/', agregar_video, name='agregar_video'),
     path('lista_videos/', lista_videos, name= 'lista_videos'),
     path('video/<int:pk>/', detalle_videos, name='detalle_videos'),
+    path('borrar_video/<int:pk>/', borrar_video, name='borrar_video'),
 
     #Todo lo relacionado a autenticación
     path('autenticarse/', autenticarse, name='autenticarse'),

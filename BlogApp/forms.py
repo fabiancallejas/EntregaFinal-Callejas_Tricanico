@@ -13,10 +13,10 @@ class DiscoFormulario(forms.Form):
     imagen = forms.ImageField()
     contenido = QuillFormField()
 
-class Video(forms.Form):
-	video_titulo = forms.CharField(max_length=200)
-	video_cuerpo = forms.CharField()
-	video_contenido = EmbedVideoField()
+class VideoFormulario(forms.Form):
+	titulo = forms.CharField(max_length=200)
+	cuerpo = forms.CharField()
+	video = EmbedVideoField()
 
 class Post(forms.ModelForm):
     titulo = forms.CharField()
