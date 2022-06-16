@@ -5,7 +5,7 @@ from autoslug import AutoSlugField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-class Disco(forms.Form):
+class DiscoFormulario(forms.Form):
     nombre = forms.CharField(max_length=30)
     anio = forms.IntegerField()
     pais = forms.CharField()

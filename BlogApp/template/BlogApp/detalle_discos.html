@@ -5,12 +5,20 @@
    {{ form.media }}
       {% include 'django_quill/media.html' %}
 	<div  class="col-md-8 offset-md-2">
-		<h1>{{ Disc.nombre }}</h1>
+		<h1>{{Disc.nombre }}</h1>
 		<p>{{ Disc.anio | linebreaks }}</p>
 		<p>{{ Disc.pais | linebreaks }}</p>
 		<p>{{ Disc.formato | linebreaks }}</p>
-		<p>{{ Disc.imagen | linebreaks }}</p>
+		<img src="{{ Disc.imagen.url }}"/>
 		<p>{{ Disc.contenido.html|safe }}</p>
+		
+		<button>
+			<a href="{% url 'editar_disco' pk %}"> Editar Disco</a>
+		</button>		
+
+		<button>
+			<a href="{% url 'borrar_disco' pk %}"> Borrar Disco</a>
+		</button>		
 
 	</div>
 

@@ -1,16 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import Disco,Video,UserRegistrationForm,UserEditForm
+from .forms import DiscoFormulario,Video,UserRegistrationForm,UserEditForm
 from .models import Disco,Videos,Post
 from django import forms
 from django.conf import settings
-from django.conf import settings
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 
@@ -49,11 +47,41 @@ def lista_discos(request):
     return render(request, "BlogApp/lista_discos.html", {"ver_discos": ver_discos})
 
 def detalle_discos(request,pk):
-	Disc = Disco.objects.get(pk=pk)
+	Disc = Disco.objects.get(id=pk)
 	contexto = {
+    'pk': pk,
 	'Disc': Disc,
 	}
 	return  render(request, 'BlogApp/detalle_discos.html', contexto)
+
+def editar_disco(request, pk):
+    disco = Disco.objects.get(id=pk)
+
+    if request.method == 'POST':
+        miDisco = DiscoFormulario(request.POST)
+
+        if miDisco.is_valid():
+            inf = miDisco.cleaned_data
+        nombre = inf ['nombre']
+        anio = inf ['anio']
+        formato = inf ['formato']
+        imagen = inf ['imagen']
+        contenido = inf ['contenido']
+        datos = Disco(nombre=nombre, anio=anio, formato=formato, imagen=imagen, contenido=contenido)
+        datos.save()
+        return render (request, 'BlogApp/index.html')
+    else:
+        miDisco = DiscoFormulario(initial= {'nombre':disco.nombre,'anio':disco.anio,'formato':disco.formato,'contenido':disco.contenido,'imagen':disco.imagen })
+        contexto = {'DiscoFormulario':miDisco,'pk':pk}
+        return render(request, 'BlogApp/editar_disco.html', contexto)
+
+def borrar_disco (request,pk):
+    disco = Disco.objects.get(id=pk)
+    disco.delete()
+    discos = Disco.objects.all()
+    contexto = {'ver_discos':discos}
+    return render (request, "BlogApp/lista_discos.html", contexto)
+
 
 ## Todo lo relacionado a Videos
 class NewForm2(forms.ModelForm):

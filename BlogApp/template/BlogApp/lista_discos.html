@@ -19,7 +19,6 @@
    <h2><a href="{% url 'detalle_discos' x.pk %}">{{ x.nombre}}</a></h2>
    <p> {{ x.anio|date }} - {{ x.pais }} </p>
    <p> {{ x.formato }} </p>
-   <img src="{{ x.imagen.url }}"/>
 
    {% empty %}
    <p>No hay discos todavía!</p>
