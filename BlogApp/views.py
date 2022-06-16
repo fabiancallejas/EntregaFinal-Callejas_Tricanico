@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic.detail import DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import login,authenticate
@@ -11,7 +11,8 @@ from django import forms
 from django.conf import settings
 from django.conf import settings
 from django.shortcuts import redirect
-from django.shortcuts import render
+from django.urls import reverse_lazy
+
 
 # Create your views here.
 
@@ -135,6 +136,16 @@ def agregar_post(request):
         form = NewForm3()
     return render(request, 'BlogApp/agregar_post.html', {'form': form})
 
+#UpdateView
+class PostEdicion(UpdateView):
+    model = Post
+    success_url = reverse_lazy('ver_posts')
+    fields = ['titulo', 'resumen', 'imagen','autor','contenido']
+
+#DeleteView
+class PostEliminar(DeleteView):
+    model = Post
+    success_url = reverse_lazy('ver_posts')
 
 def ver_posts(request):
     posts = Post.objects.all()

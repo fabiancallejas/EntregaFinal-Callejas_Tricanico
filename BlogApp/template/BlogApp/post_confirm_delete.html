@@ -1,0 +1,29 @@
+{% extends "BlogApp/padre.html" %}
+
+{% load static %}
+{% block contenidoQueCambia %}
+
+
+<html>
+   <head>
+
+   <body>
+    {% load widget_tweaks %}
+
+<!-- Form de Editar Post-->
+<section class="contact-form-wrap section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                 <form role="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h3 class="text-md mb-4">Eliminar Post</h3>
+                    <div class="form-group">
+                    Estás seguro de eliminar al post "{{object.titulo}}"
+                    </div>
+                    <button class="btn btn-main" name="submit" type="submit">Eliminar</button>
+                </form>
+            </div>
+</html>
+
+{% endblock %}

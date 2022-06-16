@@ -1,5 +1,5 @@
 from django.urls import path
-from BlogApp.views import editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView,about_us
+from BlogApp.views import editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView,about_us,PostEdicion,PostEliminar
 
 urlpatterns = [
     path('', inicio, name='inicio'),
@@ -14,6 +14,8 @@ urlpatterns = [
     path('agregar_post/', agregar_post, name='agregar_post'),
     path('<slug>', PostDetailView.as_view(), name='post'),
     path('ver_posts/', ver_posts, name='ver_posts'),
+    path('<slug>/edicion/', PostEdicion.as_view(), name='post_editar'),
+    path('<slug>/borrar/', PostEliminar.as_view(), name='post_eliminar'),
 
     #Todo lo relacionado a videos
     path('agregar_video/', agregar_video, name='agregar_video'),

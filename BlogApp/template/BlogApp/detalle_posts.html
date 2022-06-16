@@ -13,7 +13,16 @@
 				</div>                
 					<p> {{post.resumen | linebreaks}}</p> 
 					<p> {{post.contenido.html|safe}}</p>
+					
 
+					<button>
+						<a href="{% url 'post_editar' post.slug %}"> Editar Post</a>
+					</button>
+					
+					<button>
+						<a href="{% url 'post_eliminar' post.slug %}"> Borrar Post</a>
+					</button>
+					
 	
 	
 	
