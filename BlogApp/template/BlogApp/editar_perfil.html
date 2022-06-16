@@ -18,8 +18,8 @@
          <div class="container">
              <div class="row">
                  <div class="col-lg-6 col-md-12 col-sm-12">
-                      <form role="form" action = "{url 'editar_perfil' %}" method="POST">
-                         {% csrf_token %}
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <h3 class="text-md mb-4">Editar Perfil</h3>
                         <div class="form-group">
                         Usuario: {{form.username|add_class:"form-control" }}

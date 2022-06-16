@@ -7,7 +7,5 @@ class  videoAdmin(AdminVideoMixin, admin.ModelAdmin):
 	pass
 admin.site.register(Disco)
 admin.site.register(Videos, videoAdmin)
-admin.site.register(Autor)
-admin.site.register(Categorias)
 admin.site.register(Post)
 

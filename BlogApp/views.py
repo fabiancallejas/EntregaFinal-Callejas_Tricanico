@@ -4,15 +4,18 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import login,authenticate
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .forms import Disco,Video,UserRegistrationForm,UserEditForm
 from .models import Disco,Videos,Post
 from django import forms
+from django.conf import settings
+from django.conf import settings
+from django.shortcuts import redirect
+from django.shortcuts import render
 
 # Create your views here.
+
 def inicio (request):
-    documento = f"Página de Inicio"
     return render(request, 'BlogApp/index.html')
 
 class NewForm(forms.ModelForm):
@@ -21,9 +24,10 @@ class NewForm(forms.ModelForm):
       fields="__all__"
 ## Todo lo relacionado a Discografía
 
+@login_required(login_url='/BlogApp/autenticarse/')
 def disco(request):
     if request.method =="POST":
-        form = NewForm (request.POST)
+        form = NewForm (request.POST, request.FILES)
         if form.is_valid():
             datosdisco = form.cleaned_data
         nombre = datosdisco ['nombre']
@@ -56,6 +60,7 @@ class NewForm2(forms.ModelForm):
       model=Videos
       fields="__all__"
 
+@login_required(login_url='/BlogApp/autenticarse/')
 def agregar_video(request):
     if request.method =="POST":
         form = NewForm2 (request.POST)
@@ -111,6 +116,7 @@ class NewForm3(forms.ModelForm):
       fields="__all__"
       slug_field = "slug"
 
+@login_required(login_url='/BlogApp/autenticarse/')
 def agregar_post(request):
     if request.method =="POST":
         form = NewForm3 (request.POST, request.FILES)
@@ -171,7 +177,7 @@ def registrarse(request):
     return render(request, 'BlogApp/registrarse.html', {'form':form})
 
 #Editar Perfil
-@login_required
+@login_required(login_url='/BlogApp/autenticarse/')
 def editarPerfil(request):
     usuario = request.user
     if request.method == 'POST':
@@ -187,3 +193,9 @@ def editarPerfil(request):
     else:
         form = UserEditForm(instance=usuario)
     return render(request, 'BlogApp/editar_perfil.html',{"form":form, "usuario":usuario} )
+
+#About Us 
+def about_us (request):
+    return render(request, 'BlogApp/about_us.html')
+
+

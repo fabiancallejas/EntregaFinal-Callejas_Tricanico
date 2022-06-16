@@ -4,8 +4,27 @@
 {% block contenidoQueCambia %}
 
 
-<h3>Página de Inicio</h3>
-{{mensaje}}
+
+<h3 class="center" > {{mensaje}} </h3> <br>
+
+<h3 class="text-md mb-4">Melanie C Records</h3>
+
+{% load static %}
+
+<img src="{% static 'BlogApp/images/front_banner.jpeg' %}"  alt="Melanie C Discography" class="center">
+
+<br>
+
+<p style="text-align:center">Bienvenidos a nuestro sitio.</p>
+
+<p style="text-align:center">En el encontrar&aacute;s para ver la discograf&iacute;a, videos y tambi&eacute;n un blog donde agregar cosas sobre los discos de Melanie C.</p>
+
+<p style="text-align:center">Disfruta tu estad&iacute;a!</p>
+
+<p style="text-align:center">&nbsp;</p>
+
+
+
 
 
 {% endblock %}

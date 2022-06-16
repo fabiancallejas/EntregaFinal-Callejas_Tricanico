@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-ikpo+n@1e0yz@_v#4=q)lcpjhpm2dlyn%w4#+f&2zh0v(7&y%a
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -141,8 +140,7 @@ USE_I18N = True
 USE_TZ = True
 
 LOGIN_URL = 'BlogApp/autenticarse'
-
-
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

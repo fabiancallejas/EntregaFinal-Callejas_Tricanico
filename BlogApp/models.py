@@ -30,13 +30,6 @@ class Videos(models.Model):
 
 #Blog
 
-User = get_user_model()
-
-class Autor(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to="")
-    def __str__(self):
-        return self.usuario.username
 
 class Categorias(models.Model):
     titulo = models.CharField(max_length=20)
@@ -52,7 +45,7 @@ class Post(models.Model):
     resumen = models.TextField()
     fecha = models.DateTimeField(auto_now_add=True)
     imagen = models.ImageField(upload_to="imagenesPost", null=True, blank=True)
+    autor = models.CharField(max_length=200)
     contenido = QuillField()
-    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
     def __str__(self):
         return self.slug

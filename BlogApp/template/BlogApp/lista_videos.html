@@ -11,6 +11,9 @@
     {% for t in Tut %}
     <h2><a href="{% url 'detalle_videos' t.pk %}">{{ t.titulo}}</a></h2>
     <p>{{ t.cuerpo | slice:':400' }}...</p>
+    {% empty %}
+    <p>No hay videos todavía!</p>
+    <p><a href="{% url 'agregar_video' %}"> Click aquí para agregar tu primer video</a></p>
     {% endfor %}
 </div>
 

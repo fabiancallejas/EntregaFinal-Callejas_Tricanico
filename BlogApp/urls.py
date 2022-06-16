@@ -1,5 +1,5 @@
 from django.urls import path
-from BlogApp.views import editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView
+from BlogApp.views import editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView,about_us
 
 urlpatterns = [
     path('', inicio, name='inicio'),
@@ -25,5 +25,8 @@ urlpatterns = [
     path('registrarse/', registrarse, name='registrarse'),
     path('salir/', LogoutView.as_view(template_name='BlogApp/salir.html'), name='salir'),
     path('editar_perfil/', editarPerfil, name='editar_perfil'),
+
+    #About Us
+    path('about_us/', about_us, name='about_us'),
 
 ]

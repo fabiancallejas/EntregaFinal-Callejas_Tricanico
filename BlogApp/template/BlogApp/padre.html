@@ -71,12 +71,19 @@
 			</ul>
 
 			{% if not request.user.is_authenticated %}
-			<a class="btn btn-solid-border btn-round-full" href="{% url 'autenticarse' %}">Entrar</a>
+
+			<li class="nav-item dropdown">
+				<a class="btn btn-solid-border btn-round-full" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menú</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown05">
+						<li><a class="dropdown-item" href="{% url 'autenticarse' %}">Autenticarse</a></li>
+						<li><a class="dropdown-item" href="{% url 'registrarse' %}">Registrarme</a>
+						</li>
+					</ul>
 			{% endif %}
 
 			{% if request.user.is_authenticated %}
 			<li class="nav-item dropdown">
-			<a class="btn btn-solid-border btn-round-full" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">AVATAR</a>
+			<a class="btn btn-solid-border btn-round-full" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{request.user.username}}	</a>
 				<ul class="dropdown-menu" aria-labelledby="dropdown05">
 					<li><a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar mi perfil</a></li>
 					<li><a class="dropdown-item" href="{% url 'salir' %}">Salir</a>
@@ -110,10 +117,10 @@
 
 <!-- footer Start -->
 		<div class="footer-btm pt-4">
-			<div class="row">
+			<div class="container">
 				<div class="col-lg-4 col-md-12 col-sm-12">
 					<span class="text-color"> Marianella Tricánico & Fabián Callejas.</span> <br>
-					 <a href="/aboutus.html" "> About Us</a>
+					 <a href="{% url 'about_us' %}"> About Us</a>
 					</div>
 				</div>
 			</div>
