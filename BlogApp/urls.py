@@ -1,5 +1,5 @@
 from django.urls import path
-from BlogApp.views import borrar_video,borrar_disco, editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView,about_us,PostEdicion,PostEliminar,editar_disco
+from BlogApp.views import BlogPostLike, borrar_video,borrar_disco, editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView,about_us,PostEdicion,PostEliminar,editar_disco
 
 urlpatterns = [
     path('', inicio, name='inicio'),
@@ -11,7 +11,7 @@ urlpatterns = [
     path('disco/<int:pk>/', detalle_discos, name='detalle_discos'),
     path('editar_disco/<int:pk>/', editar_disco, name='editar_disco'),
     path('borrar_disco/<int:pk>/', borrar_disco, name='borrar_disco'),
-
+    path('disco-like/<int:pk>', BlogPostLike, name="disco_like"),
 
     #Todo lo relacionado a posts
     path('agregar_post/', agregar_post, name='agregar_post'),

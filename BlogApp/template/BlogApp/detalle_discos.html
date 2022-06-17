@@ -12,15 +12,31 @@
 		<img src="{{ Disc.imagen.url }}"/>
 		<p>{{ Disc.contenido.html|safe }}</p>
 		
-		<button>
-			<a href="{% url 'editar_disco' pk %}"> Editar Disco</a>
-		</button>		
+		<a class="btn btn-main" href="{% url 'editar_disco' pk %}"> Editar Disco</a>
 
-		<button>
-			<a href="{% url 'borrar_disco' pk %}"> Borrar Disco</a>
-		</button>		
+		<a class="btn btn-main" href="{% url 'borrar_disco' pk %}"> Borrar Disco</a>
 
-	</div>
+		<!-- LIKES -->
+		{% if user.is_authenticated %}
+		<br>
+		<form action="{% url 'disco_like' pk %}" method="POST"> 		<br>
+
+			{% csrf_token %}
+
+			{% if post_is_liked %}
+
+			<button type="submit" name="blogpost_id" value="{{pk}}" class="btn btn-main">Unlike</button>
+			{% else %}
+			<button type="submit" name="blogpost_id" value="{{pk}}" class="btn btn-main">Like</button>
+			{% endif %}
+		</form>
+		{% else %}
+		<a class="btn btn-main" href="{% url 'autenticarse' %}?next={{request.path}}">Log in para dar like</a><br>
+		{% endif %}
+		<br>
+
+		<strong class="text-secondary">Este post tiene {{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+			</div>
 
 {%endblock%}
 

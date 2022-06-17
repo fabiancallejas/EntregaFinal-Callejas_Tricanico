@@ -3,6 +3,8 @@ from django_quill.fields import QuillField
 from embed_video.fields  import  EmbedVideoField
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+
 
 
 #FormatoCD
@@ -16,6 +18,11 @@ class Disco (models.Model):
     formato = models.CharField(max_length=300)
     imagen = models.ImageField(upload_to='portadadiscos', null=True, blank = True)
     contenido = QuillField()
+    likes = models.ManyToManyField(User, related_name='blogpost_like')
+
+    def number_of_likes(self):
+        return self.likes.count()
+        
 
 class Videos(models.Model):
 	titulo = models.CharField(max_length=200)
@@ -47,5 +54,6 @@ class Post(models.Model):
     imagen = models.ImageField(upload_to="imagenesPost", null=True, blank=True)
     autor = models.CharField(max_length=200)
     contenido = QuillField()
+
     def __str__(self):
         return self.slug

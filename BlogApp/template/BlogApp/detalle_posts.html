@@ -15,13 +15,9 @@
 					<p> {{post.contenido.html|safe}}</p>
 					
 
-					<button>
+				
 						<a href="{% url 'post_editar' post.slug %}" class="btn btn-main"> Editar Post</a>
-					</button>
-					
-					<button>
 						<a href="{% url 'post_eliminar' post.slug %}" class="btn btn-main"> Borrar Post</a>
-					</button>
 					
 	
 	

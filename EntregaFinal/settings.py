@@ -139,7 +139,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGIN_URL = 'BlogApp/autenticarse'
+LOGIN_URL = '/BlogApp/autenticarse/'
 LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)

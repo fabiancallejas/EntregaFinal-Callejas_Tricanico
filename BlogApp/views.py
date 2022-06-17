@@ -11,6 +11,9 @@ from .models import Disco,Videos,Post
 from django import forms
 from django.conf import settings
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 # Create your views here.
@@ -24,7 +27,7 @@ class NewForm(forms.ModelForm):
       fields="__all__"
 ## Todo lo relacionado a Discografía
 
-@login_required(login_url='/BlogApp/autenticarse/')
+@login_required
 def disco(request):
     if request.method =="POST":
         form = NewForm (request.POST, request.FILES)
@@ -48,14 +51,38 @@ def lista_discos(request):
     return render(request, "BlogApp/lista_discos.html", {"ver_discos": ver_discos})
 
 def detalle_discos(request,pk):
-	Disc = Disco.objects.get(id=pk)
-	contexto = {
+    Disc = Disco.objects.get(id=pk)
+    likes_connected = get_object_or_404(Disco, id=pk)
+    liked = False
+    if likes_connected.likes.filter(id=request.user.id).exists():
+        liked = True
+        
+    number_of_likes = likes_connected.number_of_likes()
+    print(number_of_likes)
+    print(liked)
+
+    contexto = {
     'pk': pk,
 	'Disc': Disc,
-	}
-	return  render(request, 'BlogApp/detalle_discos.html', contexto)
+    'post_is_liked': liked,
+    'number_of_likes':number_of_likes
+    }
+    return  render(request, 'BlogApp/detalle_discos.html', contexto)
 
-@login_required(login_url='/BlogApp/autenticarse/')
+def BlogPostLike(request, pk):
+    post = get_object_or_404(Disco, id=request.POST.get('blogpost_id'))
+    print("like")
+    print(pk)
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse('detalle_discos', args=[str(pk)]))
+
+
+
+@login_required
 def editar_disco(request, pk):
     disco = Disco.objects.get(id=pk)
 
@@ -77,7 +104,7 @@ def editar_disco(request, pk):
         contexto = {'DiscoFormulario':miDisco,'pk':pk}
         return render(request, 'BlogApp/editar_disco.html', contexto)
 
-@login_required(login_url='/BlogApp/autenticarse/')
+@login_required
 def borrar_disco (request,pk):
     disco = Disco.objects.get(id=pk)
     disco.delete()
@@ -92,7 +119,7 @@ class NewForm2(forms.ModelForm):
       model=Videos
       fields="__all__"
 
-@login_required(login_url='/BlogApp/autenticarse/')
+@login_required
 def agregar_video(request):
     if request.method =="POST":
         form = NewForm2 (request.POST)
@@ -128,7 +155,7 @@ def detalle_videos(request,pk):
 	}
 	return  render(request, 'BlogApp/detalle_videos.html', context)
 
-@login_required(login_url='/BlogApp/autenticarse/')
+@login_required
 def borrar_video (request,pk):
     video = Videos.objects.get(id=pk)
     video.delete()
@@ -157,7 +184,7 @@ class NewForm3(forms.ModelForm):
       fields="__all__"
       slug_field = "slug"
 
-@login_required(login_url='/BlogApp/autenticarse/')
+@login_required
 def agregar_post(request):
     if request.method =="POST":
         form = NewForm3 (request.POST, request.FILES)
@@ -229,11 +256,11 @@ def registrarse(request):
     return render(request, 'BlogApp/registrarse.html', {'form':form})
 
 #Editar Perfil
-@login_required(login_url='/BlogApp/autenticarse/')
+@login_required
 def editarPerfil(request):
     usuario = request.user
     if request.method == 'POST':
-        form == UserEditForm(request.POST)
+        form = UserEditForm(request.POST)
         if form.is_valid():
             informacion = form.cleaned_data
             usuario.email = informacion['email']
