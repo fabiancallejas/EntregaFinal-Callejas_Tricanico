@@ -58,9 +58,6 @@ def detalle_discos(request,pk):
         liked = True
         
     number_of_likes = likes_connected.number_of_likes()
-    print(number_of_likes)
-    print(liked)
-
     contexto = {
     'pk': pk,
 	'Disc': Disc,
