@@ -3,7 +3,6 @@ from django_quill.fields import QuillField
 from embed_video.fields  import  EmbedVideoField
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 
 
 

@@ -1,5 +1,6 @@
 from django.urls import path
 from BlogApp.views import BlogPostLike, borrar_video,borrar_disco, editarPerfil, inicio,exito,lista_discos,agregar_video,lista_videos,detalle_videos,disco,PostDetailView,agregar_post,ver_posts,detalle_discos,autenticarse,registrarse,LogoutView,about_us,PostEdicion,PostEliminar,editar_disco
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', inicio, name='inicio'),

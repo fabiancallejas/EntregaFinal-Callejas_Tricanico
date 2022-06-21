@@ -18,14 +18,10 @@
          <div class="container">
              <div class="row">
                  <div class="col-lg-6 col-md-12 col-sm-12">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
+                    <form method="POST"> {% csrf_token %}
                         <h3 class="text-md mb-4">Editar Perfil</h3>
                         <div class="form-group">
-                        Usuario: {{form.username|add_class:"form-control" }}
-                        </div>
-                        <div class="form-group">
-                        Nombre: {{form.first_name|add_class:"form-control" }}
+                        Nombre: {{form.first_name|add_class:"form-control"}}
                         </div>
                         <div class="form-group">
                         Apellido: {{form.last_name|add_class:"form-control" }}

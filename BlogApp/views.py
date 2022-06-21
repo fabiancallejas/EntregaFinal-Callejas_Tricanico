@@ -21,16 +21,13 @@ from django.urls import reverse
 def inicio (request):
     return render(request, 'BlogApp/index.html')
 
-class NewForm(forms.ModelForm):
-   class Meta:
-      model=Disco
-      fields="__all__"
 ## Todo lo relacionado a Discografía
+
 
 @login_required
 def disco(request):
     if request.method =="POST":
-        form = NewForm (request.POST, request.FILES)
+        form = DiscoFormulario (request.POST, request.FILES)
         if form.is_valid():
             datosdisco = form.cleaned_data
         nombre = datosdisco ['nombre']
@@ -39,11 +36,11 @@ def disco(request):
         formato = datosdisco ['formato']
         imagen = datosdisco ['imagen']
         contenido = datosdisco ['contenido']
-        disco = Disco(nombre=nombre, anio=anio, pais=pais, formato=formato, imagen=imagen, contenido=contenido)
-        disco.save()
+        disco_completo = Disco(nombre=nombre, anio=anio, pais=pais, formato=formato, imagen=imagen, contenido=contenido)
+        disco_completo.save()
         return render(request, 'BlogApp/exito.html')
     else:
-        form = NewForm()
+        form = DiscoFormulario()
     return render(request, 'BlogApp/agregar_disco.html', {'form': form})
 
 def lista_discos(request):
@@ -84,7 +81,7 @@ def editar_disco(request, pk):
     disco = Disco.objects.get(id=pk)
 
     if request.method == 'POST':
-        miDisco = DiscoFormulario(request.POST)
+        miDisco = DiscoFormulario(request.POST,request.FILES)
 
         if miDisco.is_valid():
             inf = miDisco.cleaned_data
@@ -263,11 +260,13 @@ def editarPerfil(request):
             usuario.email = informacion['email']
             usuario.password1 = informacion['password1']
             usuario.password2 = informacion['password2']
+            usuario.first_name = informacion['first_name']
+            usuario.last_name = informacion['last_name']
             usuario.save()
 
             return render(request, 'BlogApp/index.html')
     else:
-        form = UserEditForm(instance=usuario)
+        form = UserEditForm(initial={'email':usuario.email, 'first_name':usuario.first_name, 'last_name':usuario.last_name})
     return render(request, 'BlogApp/editar_perfil.html',{"form":form, "usuario":usuario} )
 
 #About Us 
