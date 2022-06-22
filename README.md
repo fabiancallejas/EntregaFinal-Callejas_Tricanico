@@ -1,9 +1,13 @@
 # Melanie C Records - Blog
-URL: https://melaniecrecords.pythonanywhere.com/
 
-Usuario registrado en la web: Beckham
+Videos Presentación del Blog: https://drive.google.com/drive/folders/1LFh-onoFdGPVDZefqHe3CBW8UwljMYIe?usp=sharing
 
-Usuario Admin: administrator 
+
+URL del blog en Python Anywhere: https://melaniecrecords.pythonanywhere.com/
+
+Usuario registrado en la web: Fabiantoti / contrasenia1
+
+Usuario Admin: administrador / admin
 
 ## Dependencias:
 
@@ -46,7 +50,7 @@ _Sección para agregar discos, portadas e informacion._
 · Ver Lista de Discos
 
 
-**Implementación destacada:** Posibilidad de dar like, unlike y contador de likes a videos.
+**Implementación destacada:** Posibilidad de dar like, unlike y contador de likes a Discos.
 
 
 
@@ -118,3 +122,4 @@ _Usuario registrado:_
 · Dos imagenes fueron harcodeadas en vez de guardar el recurso en el lugar.
 
 · Borrar dependencias que no fueron utilizadas
+
